@@ -1,3 +1,8 @@
+try:
+    import json
+except ImportError:
+    from django.utils import simplejson as json
+
 from django.db import IntegrityError
 from django.db.models.base import ModelBase
 from django.db.models.signals import pre_delete as pre_delete_signal
@@ -320,7 +325,6 @@ class RatingHandler(object):
             }
         """
         from django.http import HttpResponse
-        from django.utils import simplejson as json
         score = vote.get_score()
         data = {
             'key': score.key,
