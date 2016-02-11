@@ -2,7 +2,7 @@ import string
 
 from django.db import models, transaction, IntegrityError
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey,GenericRelation
 from django.utils.datastructures import SortedDict
 from django.contrib.auth.models import User
 
@@ -16,7 +16,7 @@ class Score(models.Model):
     """
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     
     key = models.CharField(max_length=16)
     
@@ -86,7 +86,7 @@ class Vote(models.Model):
     """
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     
     key = models.CharField(max_length=16)
     score = models.FloatField()
@@ -337,8 +337,8 @@ class RatedModel(models.Model):
     """
     Mixin for votable models.
     """
-    rating_scores = generic.GenericRelation(Score)
-    rating_votes = generic.GenericRelation(Vote)
+    rating_scores = GenericRelation(Score)
+    rating_votes = GenericRelation(Vote)
     
     class Meta:
         abstract = True 

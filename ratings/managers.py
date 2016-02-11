@@ -1,14 +1,14 @@
 from django.db import models
 from django.utils.functional import memoize
 from django.contrib.contenttypes.models import ContentType
-
+from django.utils.lru_cache import lru_cache
 _get_content_type_for_model_cache = {}
 
 def get_content_type_for_model(model):
     return ContentType.objects.get_for_model(model)
 
-get_content_type_for_model = memoize(get_content_type_for_model, 
-    _get_content_type_for_model_cache, 1)
+get_content_type_for_model = lru_cache(get_content_type_for_model, 
+    _get_content_type_for_model_cache)
 
 
 class QuerysetWithContents(object):
