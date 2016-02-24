@@ -3,7 +3,7 @@ import string
 from django.db import models, transaction, IntegrityError
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey,GenericRelation
-from django.utils.datastructures import SortedDict
+from collections import OrderedDict as SortedDict
 from django.contrib.auth.models import User
 
 from ratings import managers

@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.functional import memoize
+#from django.utils.functional import memoize
 from django.contrib.contenttypes.models import ContentType
 from django.utils.lru_cache import lru_cache
 _get_content_type_for_model_cache = {}
